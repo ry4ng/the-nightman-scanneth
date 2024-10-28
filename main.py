@@ -68,7 +68,7 @@ if __name__ == "__main__":
     print("The Nightman Scanneth")
     print("=" * 50)
 
-    args = ArgHandler().get_options()
+    args = ArgHandler().get_args()
 
     host = args.host
     ports = get_ports_list(args.ports)

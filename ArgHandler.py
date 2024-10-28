@@ -8,7 +8,7 @@ class ArgHandler:
         )
         self.__create_args()
 
-    def get_options(self) -> dict:
+    def get_args(self) -> dict:
         self.args = self.parser.parse_args()
         return self.args
 
