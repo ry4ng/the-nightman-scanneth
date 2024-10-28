@@ -16,7 +16,14 @@ class ArgHandler:
         self.parser.add_argument(
             "--host",
             default="127.0.0.1",
-            help="The host you want to port scan. Default [127.0.0.1]",
+            help="The host to port scan against. Default [127.0.0.1]",
+        )
+        self.parser.add_argument(
+            "--ports",
+            "-p",
+            type=str,
+            default="1-100",
+            help="The ports to scan. Can be a range. Default [1-100]",
         )
         self.parser.add_argument(
             "--concurrent",
