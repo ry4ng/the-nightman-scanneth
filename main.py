@@ -1,13 +1,7 @@
 import asyncio
+from ArgHandler import ArgHandler
 
-#
-# Python port scanner
-#
-print("=" * 50)
-print("The Nightman Scanneth")
-print("=" * 50)
-
-ports = [port for port in range(1, 10000)]
+ports = [port for port in range(1, 500)]
 ports_map = {port: False for port in ports}
 
 
@@ -27,13 +21,12 @@ async def check_port(ip, port):
     except OSError as e:
         if e.errno == 10013:
             print(f"{ip}:{port} access denied (restricted port)")
+            ports_map[port] = True
         else:
             print(f"{ip}:{port} encountered an error: {e}")
 
 
-async def main(host):
-    batch_size = 500
-
+async def main(host, batch_size):
     batch = []
     for i, port in enumerate(ports):
         batch.append(check_port(host, port))
@@ -48,12 +41,28 @@ async def main(host):
         await asyncio.gather(*batch)
 
 
-host = "127.0.0.1"
-asyncio.run(main(host))
+if __name__ == "__main__":
+    #
+    # Python port scanner
+    #
+    print("=" * 50)
+    print("The Nightman Scanneth")
+    print("=" * 50)
 
-print("=" * 50)
-print("Open Ports")
-print("=" * 50)
-for port, alive in ports_map.items():
-    if alive:
-        print(f"127.0.0.1:{port}")
+    args = ArgHandler().get_options()
+
+    host = args.host
+    batch_size = args.concurrent
+
+    print(f"Scanning Host:\t\t[{host}]")
+    print(f"Concurrent Requests:\t[{batch_size}]")
+    print("\n")
+
+    asyncio.run(main(host, batch_size))
+
+    print("=" * 50)
+    print("Open Ports")
+    print("=" * 50)
+    for port, alive in ports_map.items():
+        if alive:
+            print(f"127.0.0.1:{port}")
