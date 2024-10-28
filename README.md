@@ -1,5 +1,7 @@
 # The Nightman Scanneth
 
+_Ports, the fighter of the Nightman...aahaa._
+
 A simple Python port scanner.
 
 ![alt text](https://i.ibb.co/QDHD6SF/logo3.png)
