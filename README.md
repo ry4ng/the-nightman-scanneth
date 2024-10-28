@@ -1,4 +1,4 @@
-# the-nightman-scanneth
+# The Nightman Scanneth
 
 A simple Python port scanner.
 
