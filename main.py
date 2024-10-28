@@ -1,9 +1,6 @@
 import asyncio
 from ArgHandler import ArgHandler
 
-ports = [port for port in range(1, 500)]
-ports_map = {port: False for port in ports}
-
 
 async def check_port(ip, port):
     try:
@@ -53,8 +50,14 @@ if __name__ == "__main__":
 
     host = args.host
     batch_size = args.concurrent
+    port_start = 1
+    port_end = 500
+    ports = [port for port in range(port_start, port_end)]
+    ports_map = {port: False for port in ports}
+    protocol = "TCP"
 
     print(f"Scanning Host:\t\t[{host}]")
+    print(f"Scanning Ports:\t\t[{port_start}-{port_end}][{protocol}]")
     print(f"Concurrent Requests:\t[{batch_size}]")
     print("\n")
 
