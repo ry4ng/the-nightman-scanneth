@@ -3,9 +3,9 @@ import asyncio
 #
 # Python port scanner
 #
-print("=" * 100)
-print("Python simple port scanner")
-print("=" * 100)
+print("=" * 50)
+print("The Nightman Scanneth")
+print("=" * 50)
 
 ports = [port for port in range(1, 10000)]
 ports_map = {port: False for port in ports}
@@ -31,15 +31,15 @@ async def check_port(ip, port):
             print(f"{ip}:{port} encountered an error: {e}")
 
 
-async def main():
+async def main(host):
     batch_size = 500
 
     batch = []
     for i, port in enumerate(ports):
-        batch.append(check_port("127.0.0.1", port))
+        batch.append(check_port(host, port))
 
         if (i + 1) % batch_size == 0:
-            print(f"Scanning batch of [{batch_size}] ports [{i}]")
+            print(f"Scanning batch of [{batch_size}] ports [{i} out of {len(ports)}]")
             await asyncio.gather(*batch)
             batch = []
 
@@ -48,7 +48,8 @@ async def main():
         await asyncio.gather(*batch)
 
 
-asyncio.run(main())
+host = "127.0.0.1"
+asyncio.run(main(host))
 
 print("=" * 50)
 print("Open Ports")
