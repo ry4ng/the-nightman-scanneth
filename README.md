@@ -9,4 +9,6 @@ A simple Python port scanner.
 ## Todo
 
 -   Support UDP scanning
+-   Look at integrating github workflows
+-   Integrate a unit testing framework
 -   ~~Support port ranges via command line arguments~~
